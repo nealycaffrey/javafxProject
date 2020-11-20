@@ -1,4 +1,4 @@
-package sample.code;
+package sample;
 
 
 public class View {

@@ -1,9 +1,9 @@
-package sample.code;
+package sample;
 
 import java.util.ArrayList;
 
 public class Heap {
-    private ArrayList<Node> nodes;
+    private final ArrayList<Node> nodes;
 
     public Heap() {
         nodes = new ArrayList<>();
@@ -22,6 +22,15 @@ public class Heap {
                 break;
             }
         }
+    }
+
+    public boolean search(int data){
+        for(Node node: nodes){
+            if(node.getData() == data){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void remove() {
@@ -68,9 +77,9 @@ public class Heap {
         }
     }
 
-    private Node getSmallerChild(int index){
-        return nodes.get(getSmallerIndex(index));
-    }
+    //private Node getSmallerChild(int index){
+       // return nodes.get(getSmallerIndex(index));
+   // }
 
     private static ArrayList<String> tempStringArray = new ArrayList<>();
 
@@ -105,11 +114,42 @@ public class Heap {
         return nodes.get(0).getData();
     }
 
+    public Node getRootNode(){
+        return nodes.get(0);
+    }
+
     public int getTreeHeight() {
         return (int) (Math.log(nodes.size()) / Math.log(2));
     }
 
+    public int size(){
+        return nodes.size();
+    }
+    //iske niche sab bakwaas
+    public Node getLeft(Node node){
+        return node.left;
+    }
 
+    public Node getRight(Node node){
+        return node.right;
+    }
+
+    public java.util.ArrayList<Node> path(Node node){
+        java.util.ArrayList<Node> list = new java.util.ArrayList<>();
+        Node current = getRootNode();
+        while(current != null){
+            list.add(current);
+            if(node.getData() < current.getData()){//or the opposite i didnt really use brain here
+                current = getLeft(current);
+            } else if(node.getData() > current.getData()){
+                current = getRight(current);
+            } else
+                break;
+        }
+        return list;
+    }
+
+    //yaha tak
 
     public static void main(String[] args) {
         Heap heap = new Heap();
